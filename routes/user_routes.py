@@ -1,11 +1,13 @@
 from email import message
 from fastapi import APIRouter
 
-from models.user_models import User, SignIn
+from models.user_models import User, SignIn, Number
 from config.db import collection
 from schemas.user_schemas import userEntity, usersEntity
 
 from bson import ObjectId
+import requests
+import json
 
 user = APIRouter()
 
@@ -47,6 +49,32 @@ async def sign_in(signIn: SignIn):
     user = usersEntity(collection.find({"aadhar_no": signIn.aadhar_no, "email": signIn.email}))
     if len(user)>0:
         if user[0]['aadhar'] == signIn.aadhar_no and user[0]['email'] == signIn.email:
-            return {"success": True}
+            return {"success": True, "data": signIn}
     else:
-        return {"success": False}
+            return {"success": False}
+
+@user.post('/get-otp')
+async def get_otp(number: Number):
+    url = "https://www.fast2sms.com/dev/bulk"
+    my_data = {
+        'sender_id': 'FSTSMS',
+        'message': '<#> 1234 8JbtsPvGnRR',
+        'language': 'english',
+        'route': 'p',
+        'numbers': number	
+    }
+
+    headers = {
+        'authorization': 'pBaJSZR7gmz3b61VLxr4wGPN25CqjeEuyfHh0O9AW8ciFsMotn6Y3EDoxeflpri7tSqazBhKIgHbX40N',
+        'Content-Type': "application/x-www-form-urlencoded",
+        'Cache-Control': "no-cache"
+    }
+
+    response = requests.request("POST",
+                                url,
+                                data = my_data,
+                                headers = headers)
+
+    returned_msg = json.loads(response.text)
+
+    return {"success": "ok", "data": returned_msg}
