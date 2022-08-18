@@ -66,7 +66,7 @@ async def get_otp(number: Number):
     url = "https://www.fast2sms.com/dev/bulk"
     my_data = {
         'sender_id': 'FSTSMS',
-        'message': '<#> {otp} 8JbtsPvGnRR',
+        'message': f'<#> {otp} 8JbtsPvGnRR',
         'language': 'english',
         'route': 'p',
         'numbers': number
