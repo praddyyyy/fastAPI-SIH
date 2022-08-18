@@ -1,5 +1,6 @@
 from email import message
 from fastapi import APIRouter
+import random
 
 from models.user_models import User, SignIn, Number
 from config.db import collection
@@ -14,7 +15,7 @@ import os
 
 load_dotenv()
 FAST2SMS = os.getenv("FAST2SMS")
-
+print(FAST2SMS)
 user = APIRouter()
 
 @user.get('/')
@@ -61,10 +62,11 @@ async def sign_in(signIn: SignIn):
 
 @user.post('/get-otp')
 async def get_otp(number: Number):
+    otp = random.randint(1000,9999)
     url = "https://www.fast2sms.com/dev/bulk"
     my_data = {
         'sender_id': 'FSTSMS',
-        'message': '<#> 1234 8JbtsPvGnRR',
+        'message': '<#> {otp} 8JbtsPvGnRR',
         'language': 'english',
         'route': 'p',
         'numbers': number
