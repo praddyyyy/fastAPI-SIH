@@ -8,3 +8,6 @@ class User(BaseModel):
 class SignIn(BaseModel):
     email: str
     aadhar_no: str
+
+class Number(BaseModel):
+    number: str
