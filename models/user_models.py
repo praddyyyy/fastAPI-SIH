@@ -6,7 +6,6 @@ class AcademicDetail(BaseModel):
     course: str
     doj: str
     dol: str
-
 class User(BaseModel):
     aadhar_no: str
     tc: str

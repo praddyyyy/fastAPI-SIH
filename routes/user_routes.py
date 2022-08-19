@@ -15,7 +15,6 @@ import os
 
 load_dotenv()
 FAST2SMS = os.getenv("FAST2SMS")
-print(FAST2SMS)
 user = APIRouter()
 
 @user.get('/')
