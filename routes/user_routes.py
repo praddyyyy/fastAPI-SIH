@@ -55,7 +55,7 @@ async def sign_in(signIn: SignIn):
     user = usersEntity(collection.find({"aadhar_no": signIn.aadhar_no, "email": signIn.email}))
     if len(user)>0:
         if user[0]['aadhar'] == signIn.aadhar_no and user[0]['email'] == signIn.email:
-            return {"success": True, "data": signIn}
+            return {"success": True, "data": {"name": user[0]['name'], "phone": user[0]['phone']}}
     else:
             return {"success": False}
 

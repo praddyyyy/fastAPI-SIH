@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import Dict, List
 class AcademicDetail(BaseModel):
     college: str
     university: str
@@ -16,7 +16,7 @@ class User(BaseModel):
     gender: str
     phone: str
     birthdate: str
-    academic_details: List[AcademicDetail]
+    academic_details: List[Dict]
 class SignIn(BaseModel):
     email: str
     aadhar_no: str
