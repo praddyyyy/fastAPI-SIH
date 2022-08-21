@@ -113,7 +113,7 @@ async def update_user(id: str):
 @user.put('/update-user-many/{id}')
 async def update_user(id: str, data: dict):
     collection.find_one_and_update({"aadhar_no": id}, {
-        "$set": data
+        "$push": {'academic_details': data}
     })
     user = usersEntity(collection.find({"aadhar_no": id}))
     return {"status": "ok", "data": user}
