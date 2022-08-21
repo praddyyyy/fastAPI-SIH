@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Dict, List
 class AcademicDetail(BaseModel):
-    college: str
+    institution_name: str
     course: str
     doj: str
     dol: str
