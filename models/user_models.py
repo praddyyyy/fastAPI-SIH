@@ -7,7 +7,7 @@ class AcademicDetail(BaseModel):
     dol: str
 class User(BaseModel):
     aadhar_no: str
-    tc: str
+    tc: bool
     institute_id: str
     name: str
     email: str
