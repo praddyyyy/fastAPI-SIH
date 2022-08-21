@@ -10,3 +10,4 @@ client = MongoClient(MONGODB)
 db = client.test
 
 collection = db.users
+collection_institutes = db.institutes

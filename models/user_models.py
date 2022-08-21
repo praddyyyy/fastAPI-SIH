@@ -23,3 +23,8 @@ class SignIn(BaseModel):
 
 class Number(BaseModel):
     number: str
+
+#login model for institutions
+class LoginIn(BaseModel):
+    udise: str
+    password: str

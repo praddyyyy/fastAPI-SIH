@@ -1,9 +1,8 @@
-from email import message
 from fastapi import APIRouter
 import random
 
-from models.user_models import User, SignIn, Number
-from config.db import collection
+from models.user_models import User, SignIn, Number, LoginIn
+from config.db import collection, collection_institutes
 from schemas.user_schemas import userEntity, usersEntity
 
 from bson import ObjectId
@@ -85,3 +84,13 @@ async def get_otp(number: Number):
     returned_msg = json.loads(response.text)
 
     return {"success": "ok", "data": returned_msg}
+
+@user.get('/log-in')
+async def login(logIn: LoginIn):
+    user = collection_institutes.find_one({"udise_sch_code": logIn.udise, "password": logIn.password})
+    if user['udise_sch_code'] == logIn.udise and user['password'] == logIn.password:
+        data = {
+            "school_name": user['school_name'],
+            "udise": user['udise_sch_code']
+        }
+        return {"success": True, "data": data}
