@@ -101,3 +101,11 @@ async def login(logIn: LoginIn):
 async def get_user(code):
     user = usersEntity(collection.find({"institute_id": code, "tc": False}))
     return {"status": "ok", "data": user}
+
+@user.put('/update-user-tc/{id}')
+async def update_user(id: str):
+    collection.find_one_and_update({"aadhar_no": id}, {
+        "$set": {"tc": True}
+    })
+    user = usersEntity(collection.find({"aadhar_no": id}))
+    return {"status": "ok", "data": user}
