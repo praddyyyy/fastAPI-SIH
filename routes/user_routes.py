@@ -94,3 +94,5 @@ async def login(logIn: LoginIn):
             "udise": user['udise_sch_code']
         }
         return {"success": True, "data": data}
+    else:
+        return {"success": False, "data": []}
