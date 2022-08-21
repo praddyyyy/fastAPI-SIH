@@ -5,7 +5,7 @@ def userEntity(item) -> dict:
         "email": item["email"],
         "aadhar": item["aadhar_no"],
         "phone": item["phone"],
-        "udise": item["udise"]
+        "udise": item["institute_id"]
     }
 
 def usersEntity(entity) -> list:
