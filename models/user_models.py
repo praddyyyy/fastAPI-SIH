@@ -16,6 +16,7 @@ class User(BaseModel):
     gender: str
     phone: str
     birthdate: str
+    udise: str
     academic_details: List[Dict]
 class SignIn(BaseModel):
     email: str

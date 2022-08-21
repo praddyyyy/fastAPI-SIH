@@ -4,7 +4,8 @@ def userEntity(item) -> dict:
         "name": item["name"],
         "email": item["email"],
         "aadhar": item["aadhar_no"],
-        "phone": item["phone"]
+        "phone": item["phone"],
+        "udise": item["udise"]
     }
 
 def usersEntity(entity) -> list:

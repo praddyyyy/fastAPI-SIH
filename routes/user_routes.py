@@ -96,3 +96,8 @@ async def login(logIn: LoginIn):
             "udise": user['udise_sch_code']
         }
         return {"success": True, "data": data}
+
+@user.get('/find-user-udise/{code}')
+async def get_user(code):
+    user = usersEntity(collection.find({"udise": code}))
+    return {"status": "ok", "data": user}
