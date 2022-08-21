@@ -99,5 +99,5 @@ async def login(logIn: LoginIn):
 
 @user.get('/find-user-udise/{code}')
 async def get_user(code):
-    user = usersEntity(collection.find({"udise": code}))
+    user = usersEntity(collection.find({"institute_id": code}))
     return {"status": "ok", "data": user}
