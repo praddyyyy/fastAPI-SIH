@@ -37,9 +37,9 @@ async def create_user(user: User):
     return {"status": "ok", "data": user}
 
 @user.put('/update-user-id/{id}')
-async def update_user(id: str, user: User):
+async def update_user(id: str, udise: dict):
     collection.find_one_and_update({"aadhar_no": id}, {
-        "$set": dict(user)
+        "$set": udise
     })
     user = usersEntity(collection.find({"aadhar_no": id}))
     return {"status": "ok", "data": user}
