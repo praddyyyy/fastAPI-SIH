@@ -88,11 +88,11 @@ async def get_otp(number: Number):
 @user.get('/log-in')
 async def login(logIn: LoginIn):
     user = collection_institutes.find_one({"udise_sch_code": logIn.udise, "password": logIn.password})
-    if user['udise_sch_code'] == logIn.udise and user['password'] == logIn.password:
+    if not user:
+        return {"success": False, "data": []}
+    elif user['udise_sch_code'] == logIn.udise and user['password'] == logIn.password:
         data = {
             "school_name": user['school_name'],
             "udise": user['udise_sch_code']
         }
         return {"success": True, "data": data}
-    else:
-        return {"success": False, "data": []}
