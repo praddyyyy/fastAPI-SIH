@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 from fastapi import APIRouter
 import random
 
