@@ -139,3 +139,11 @@ async def create_user(user: AadhaarUser):
     _id = collection_aadhaar.insert_one(dict(user))
     user = aadhaarsEntity(collection_aadhaar.find({"_id": _id.inserted_id}))
     return {"status": "ok", "data": user}
+
+@user.put('/last/{id}/{doj}/{dol}')
+async def last(id:str, doj:str, dol:str):
+    collection.find_one_and_update({"aadhar_no": id, "academic_details.doj": doj}, {
+        "$set": {"academic_details.$.dol": dol}
+    })
+
+    return {"status": "ok"}
