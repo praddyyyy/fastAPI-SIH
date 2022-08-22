@@ -26,3 +26,8 @@ class Number(BaseModel):
 class LoginIn(BaseModel):
     udise: str
     password: str
+
+class AadhaarUser(BaseModel):
+    aadhaar: str
+    name: str
+    phone: str

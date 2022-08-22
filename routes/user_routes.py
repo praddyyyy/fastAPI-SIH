@@ -1,9 +1,10 @@
+from tkinter.tix import Tree
 from fastapi import APIRouter
 import random
 
-from models.user_models import User, SignIn, Number, LoginIn
-from config.db import collection, collection_institutes
-from schemas.user_schemas import userEntity, usersEntity
+from models.user_models import User, SignIn, Number, LoginIn, AadhaarUser
+from config.db import collection, collection_institutes, collection_aadhaar
+from schemas.user_schemas import usersEntity, aadhaarsEntity
 
 from bson import ObjectId
 import requests
@@ -116,4 +117,18 @@ async def update_user(id: str, data: dict):
         "$push": {'academic_details': data}
     })
     user = usersEntity(collection.find({"aadhar_no": id}))
+    return {"status": "ok", "data": user}
+
+@user.get('/find-phone/{id}')
+async def find_phone(id: str):
+    user = collection_aadhaar.find_one({"aadhaar": id})
+    if user:
+        return {"status": True, "phone": user['phone']}
+    else:
+        return {"status": False, "phone": []}
+
+@user.post('/create-aadhaar-user')
+async def create_user(user: AadhaarUser):
+    _id = collection_aadhaar.insert_one(dict(user))
+    user = aadhaarsEntity(collection_aadhaar.find({"_id": _id.inserted_id}))
     return {"status": "ok", "data": user}

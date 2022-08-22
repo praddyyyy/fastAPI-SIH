@@ -11,3 +11,4 @@ db = client.test
 
 collection = db.users
 collection_institutes = db.institutes
+collection_aadhaar = db.aadhaar
