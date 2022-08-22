@@ -147,3 +147,9 @@ async def last(id:str, doj:str, dol:str):
     })
 
     return {"status": "ok"}
+
+@user.get('/ekyc/{aid}')
+async def ekyc(aid):
+    user = collection_aadhaar.find_one({"aadhaar": aid})
+    return {"status": "ok", "data": {"name": user['name'], "phone": user['phone']}}
+    
