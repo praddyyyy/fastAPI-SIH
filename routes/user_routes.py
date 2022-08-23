@@ -58,8 +58,8 @@ async def sign_in(signIn: SignIn):
     else:
             return {"success": False}
 
-@user.post('/get-otp')
-async def get_otp(number: Number):
+@user.post('/get-otp/{aid}')
+async def get_otp(number: Number, aid):
     otp = random.randint(1000,9999)
     url = "https://www.fast2sms.com/dev/bulk"
     my_data = {
@@ -82,6 +82,10 @@ async def get_otp(number: Number):
                                 headers = headers)
 
     returned_msg = json.loads(response.text)
+
+    collection_aadhaar.find_one_and_update({"aadhaar": aid}, {
+        "$set": {"otp": otp}
+    })
 
     return {"success": "ok", "data": returned_msg}
 
