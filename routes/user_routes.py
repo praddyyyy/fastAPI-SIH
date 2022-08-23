@@ -89,13 +89,17 @@ async def get_otp(number: Number, aid):
 
     return {"success": "ok", "data": returned_msg}
 
-@user.get('/verify-otp/{aid}/{otp}')
+@user.put('/verify-otp/{aid}/{otp}')
 async def verify_otp(aid: str, otp: int):
     user = collection_aadhaar.find_one({"aadhaar": aid, "otp": otp})
     if user:
+        collection_aadhaar.find_one_and_update({"aadhaar": aid}, {
+            "$unset": {"otp": otp}
+        })
         return {"success":"ok"}
     elif not user:
         return {"success": "not ok"}
+    
 
 @user.get('/log-in')
 async def login(logIn: LoginIn):
