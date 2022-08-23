@@ -87,7 +87,7 @@ async def get_otp(number: Number, aid):
         "$set": {"otp": otp}
     })
 
-    return {"success": "ok", "data": returned_msg}
+    return {"success": "ok", "data": returned_msg, "otp": otp}
 
 @user.put('/verify-otp/{aid}/{otp}')
 async def verify_otp(aid: str, otp: int):
