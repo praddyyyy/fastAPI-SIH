@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 import random
 
-from models.user_models import User, SignIn, Number, LoginIn, AadhaarUser, Email
+from models.user_models import User, SignIn, Number, LoginIn, AadhaarUser
 from config.db import collection, collection_institutes, collection_aadhaar
 from schemas.user_schemas import usersEntity, aadhaarsEntity
 
