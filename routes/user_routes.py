@@ -193,3 +193,8 @@ async def set_parent_approval(id:str, key:str):
     
     else:
         return {"status": "not ok"}
+
+@user.get('/get-tc-approved-user')
+def get_tc_approved_user():
+    users = collection.find({"parent_approval": True})
+    return {"success": "ok", "data": users}
