@@ -171,5 +171,5 @@ async def ekyc(aid):
     
 @user.get('/send-mail/{mail}')
 async def send_mail(mail):
-    mail = collection.find_one({"parent_mail": mail})
-    return {"status": "ok", "email": mail}
+    email = collection.find_one({"parent_mail": mail})
+    return {"status": "ok", "email": email}
