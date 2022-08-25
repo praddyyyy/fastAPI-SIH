@@ -177,7 +177,7 @@ async def approval(id: str):
 
     return {"status": "ok"}
 
-@user.post('/set-parent-approval/{id}/{key}')
+@user.get('/set-parent-approval/{id}/{key}')
 async def set_parent_approval(id:str, key:str):
     if key == 'approve':
         collection.find_one_and_update({"aadhar_no": id}, {
