@@ -16,6 +16,7 @@ class User(BaseModel):
     birthdate: str
     parent_mail: str
     academic_details: List[Dict]
+    parent_approval: str
 class SignIn(BaseModel):
     email: str
     aadhar_no: str

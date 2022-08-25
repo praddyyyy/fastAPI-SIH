@@ -9,7 +9,8 @@ def userEntity(item) -> dict:
         "tc": item["tc"],
         "academic_details": item["academic_details"],
         "dob": item["birthdate"],
-        "parent_mail": item["parent_mail"]
+        "parent_mail": item["parent_mail"],
+        "parent_approval": item["parent_approval"]
     }
 
 def usersEntity(entity) -> list:
