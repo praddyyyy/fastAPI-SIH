@@ -168,3 +168,11 @@ async def last(id:str, doj:str, dol:str):
 async def ekyc(aid):
     user = collection_aadhaar.find_one({"aadhaar": aid})
     return {"status": "ok", "data": {"name": user['name'], "phone": user['phone']}}
+
+@user.put('/await-approval/{id}')
+async def approval(id: str):
+    collection.find_one_and_update({"aadhar_no": id}, {
+        "$set": {"parent_approval": False}
+    })
+
+    return {"status": "ok"}
