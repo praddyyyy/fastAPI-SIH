@@ -173,7 +173,7 @@ async def ekyc(aid):
     
 @user.get('/send-mail_url/{mail}')
 async def send_mail_url(mail):
-    TO = "pradeeshwar10@gmail.com"
+    TO = mail
     FROM = "mtech339@gmail.com"
 
     BODY = """
