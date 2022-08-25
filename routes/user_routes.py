@@ -169,3 +169,7 @@ async def ekyc(aid):
     user = collection_aadhaar.find_one({"aadhaar": aid})
     return {"status": "ok", "data": {"name": user['name'], "phone": user['phone']}}
     
+@user.get('/send-mail/{mail}')
+async def send_mail(mail):
+    mail = collection.find_one({"parent_mail": mail})
+    return {"status": "ok", "email": mail}
