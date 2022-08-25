@@ -177,10 +177,19 @@ async def approval(id: str):
 
     return {"status": "ok"}
 
-@user.put('/set-parent-approval/{id}')
-async def set_parent_approval(id:str):
-    collection.find_one_and_update({"aadhar_no": id}, {
-        "$set": {"parent_approval": True}
-    })
+@user.put('/set-parent-approval/{id}/{key}')
+async def set_parent_approval(id:str, key:str):
+    if key == 'approve':
+        collection.find_one_and_update({"aadhar_no": id}, {
+            "$set": {"parent_approval": True}
+        })
+        return {"status": "ok"}
 
-    return {"status": "ok"}
+    elif key == 'deny':
+        collection.find_one_and_update({"aadhar_no": id}, {
+            "$set": {"parent_approval": False}
+        })
+        return {"status": "ok"}
+    
+    else:
+        return {"status": "not ok"}
