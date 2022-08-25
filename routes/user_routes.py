@@ -12,6 +12,8 @@ import json
 from dotenv import load_dotenv
 import os
 
+import send_mail
+
 load_dotenv()
 FAST2SMS = os.getenv("FAST2SMS")
 user = APIRouter()
@@ -169,7 +171,21 @@ async def ekyc(aid):
     user = collection_aadhaar.find_one({"aadhaar": aid})
     return {"status": "ok", "data": {"name": user['name'], "phone": user['phone']}}
     
-@user.get('/send-mail/{mail}')
-async def send_mail(mail):
-    email = collection.find_one({"parent_mail": mail})
-    return {"status": "ok", "email": email}
+@user.get('/send-mail_url/{mail}')
+async def send_mail_url(mail):
+    TO = "pradeeshwar10@gmail.com"
+    FROM = "mtech339@gmail.com"
+
+    BODY = """
+
+            <h1>Transfer Certificate Request Verification</h1>
+            <a href="www.google.com">Authorize Request</a>
+            <a href="www.google.com">Deny Request</a>
+
+            """
+    res = send_mail(TO, FROM, BODY)
+
+    if res == True:
+        return {"status": True}
+    else:
+        return {"status": False}
