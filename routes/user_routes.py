@@ -176,3 +176,11 @@ async def approval(id: str):
     })
 
     return {"status": "ok"}
+
+@user.put('/set-parent-approval/{id}')
+async def set_parent_approval(id:str):
+    collection.find_one_and_update({"aadhar_no": id}, {
+        "$set": {"parent_approval": True}
+    })
+
+    return {"status": "ok"}
