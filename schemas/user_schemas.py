@@ -8,7 +8,7 @@ def userEntity(item) -> dict:
         "udise": item["institute_id"],
         "tc": item["tc"],
         "academic_details": item["academic_details"],
-        "dob": item["birth_date"]
+        "dob": item["birthdate"]
     }
 
 def usersEntity(entity) -> list:
