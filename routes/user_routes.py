@@ -129,7 +129,7 @@ async def update_user(id: str):
 @user.put('/update-user-tc/{id}')
 async def update_user(id: str):
     collection.find_one_and_update({"aadhar_no": id}, {
-        "$set": {"tc": True}
+        "$set": {"tc": True, "parent_approval": "None"}
     })
     user = usersEntity(collection.find({"aadhar_no": id}))
     return {"status": "ok", "data": user}
