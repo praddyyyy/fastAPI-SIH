@@ -196,5 +196,5 @@ async def set_parent_approval(id:str, key:str):
 
 @user.get('/get-tc-approved-user')
 def get_tc_approved_user():
-    users = usersEntity(collection.find({"parent_approval": True}))
+    users = usersEntity(collection.find({"parent_approval": True, "tc": False}))
     return {"success": "ok", "data": users}
