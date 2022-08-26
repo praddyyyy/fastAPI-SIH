@@ -172,7 +172,7 @@ async def ekyc(aid):
 @user.put('/await-approval/{id}')
 async def approval(id: str):
     collection.find_one_and_update({"aadhar_no": id}, {
-        "$set": {"parent_approval": False}
+        "$set": {"parent_approval": "False"}
     })
 
     return {"status": "ok"}
@@ -181,13 +181,13 @@ async def approval(id: str):
 async def set_parent_approval(id:str, key:str):
     if key == 'approve':
         collection.find_one_and_update({"aadhar_no": id}, {
-            "$set": {"parent_approval": True}
+            "$set": {"parent_approval": "True"}
         })
         return {"status": "ok"}
 
     elif key == 'deny':
         collection.find_one_and_update({"aadhar_no": id}, {
-            "$set": {"parent_approval": False}
+            "$set": {"parent_approval": "False"}
         })
         return {"status": "ok"}
     
@@ -196,5 +196,5 @@ async def set_parent_approval(id:str, key:str):
 
 @user.get('/get-tc-approved-user')
 def get_tc_approved_user():
-    users = usersEntity(collection.find({"parent_approval": True, "tc": False}))
+    users = usersEntity(collection.find({"parent_approval": "True", "tc": False}))
     return {"success": "ok", "data": users}
