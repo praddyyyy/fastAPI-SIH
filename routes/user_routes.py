@@ -187,7 +187,7 @@ async def set_parent_approval(id:str, key:str):
 
     elif key == 'deny':
         collection.find_one_and_update({"aadhar_no": id}, {
-            "$set": {"parent_approval": "False"}
+            "$set": {"parent_approval": "None"}
         })
         return {"status": "ok"}
     
